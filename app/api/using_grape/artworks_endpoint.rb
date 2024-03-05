@@ -30,6 +30,15 @@ module UsingGrape
           error! errors, 400
         end
       end
+
+      delete ":id" do
+        artwork = Artwork.find(params[:id])
+        if artwork
+          artwork.destroy
+        else
+          error!
+        end
+      end
     end
   end
 end
