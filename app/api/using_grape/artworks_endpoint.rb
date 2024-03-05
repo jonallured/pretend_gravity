@@ -20,6 +20,16 @@ module UsingGrape
           error! errors, 400
         end
       end
+
+      put ":id" do
+        artwork = Artwork.find(params[:id])
+        if artwork.update(params)
+          artwork
+        else
+          errors = {errors: artwork.errors.full_messages.to_sentence}
+          error! errors, 400
+        end
+      end
     end
   end
 end
