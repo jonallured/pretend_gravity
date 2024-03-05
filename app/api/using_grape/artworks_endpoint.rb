@@ -6,6 +6,10 @@ module UsingGrape
       get do
         Artwork.all
       end
+
+      get ":id" do
+        Artwork.find(params[:id])
+      end
     end
   end
 end
