@@ -4,7 +4,7 @@ module UsingGrape
 
     namespace :artworks do
       get do
-        Artwork.all
+        Artwork.all.order(created_at: :desc)
       end
 
       get ":id" do
