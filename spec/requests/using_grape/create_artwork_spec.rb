@@ -24,4 +24,19 @@ describe "POST /api/using_grape/artworks" do
       expect(response.parsed_body).to eq artwork.as_json
     end
   end
+
+  context "with bonus param" do
+    it "ignores that param" do
+      params = {
+        amount_cents: 100_000,
+        artist_name: "Sally Sculptor",
+        featured: true,
+        medium: "Clay",
+        title: "Fancy cup"
+      }
+      post "/api/using_grape/artworks", params: params
+      expect(response.status).to eq 201
+      expect(response.parsed_body["featured"]).to eq false
+    end
+  end
 end
