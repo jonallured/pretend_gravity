@@ -31,6 +31,16 @@ module Api
         end
       end
 
+      def destroy
+        artwork = Artwork.find(params[:id])
+        if artwork
+          artwork.destroy
+          head :ok
+        else
+          head :not_found
+        end
+      end
+
       private
 
       def artwork_params
