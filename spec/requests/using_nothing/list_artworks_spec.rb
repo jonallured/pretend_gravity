@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe "/api/using_nothing/artworks" do
+describe "GET /api/using_nothing/artworks" do
   context "without any artworks" do
     it "returns an empty array" do
       get "/api/using_nothing/artworks"

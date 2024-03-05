@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe "/api/using_nothing/artworks/:id" do
+describe "GET /api/using_nothing/artworks/:id" do
   let!(:artwork) { FactoryBot.create(:artwork) }
 
   context "with invalid id" do
