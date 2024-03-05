@@ -12,7 +12,7 @@ module UsingGrape
       end
 
       post do
-        artwork = Artwork.new(params)
+        artwork = Artwork.new(params.except(:featured))
         if artwork.save
           artwork
         else
@@ -23,7 +23,7 @@ module UsingGrape
 
       put ":id" do
         artwork = Artwork.find(params[:id])
-        if artwork.update(params)
+        if artwork.update(params.except(:featured))
           artwork
         else
           errors = {errors: artwork.errors.full_messages.to_sentence}
