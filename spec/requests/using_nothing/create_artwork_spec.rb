@@ -6,6 +6,7 @@ describe "POST /api/using_nothing/artworks" do
       params = {}
       post "/api/using_nothing/artworks", params: params
       expect(response.status).to eq 400
+      expect(response.parsed_body.key?("errors")).to eq true
     end
   end
 

@@ -21,6 +21,16 @@ module Api
         end
       end
 
+      def update
+        artwork = Artwork.find(params[:id])
+        if artwork.update(artwork_params)
+          render json: artwork
+        else
+          errors = {errors: artwork.errors.full_messages.to_sentence}
+          render json: errors, status: :bad_request
+        end
+      end
+
       private
 
       def artwork_params
