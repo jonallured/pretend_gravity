@@ -2,6 +2,13 @@ module UsingGrape
   class ArtworksEndpoint < Grape::API
     format :json
 
+    helpers do
+      def artwork_params
+        strong_params = ActionController::Parameters.new(params)
+        strong_params.permit(:amount_cents, :artist_name, :medium, :title)
+      end
+    end
+
     namespace :artworks do
       get do
         Artwork.all.order(featured: :desc, created_at: :desc)
@@ -12,7 +19,7 @@ module UsingGrape
       end
 
       post do
-        artwork = Artwork.new(params)
+        artwork = Artwork.new(artwork_params)
         if artwork.save
           artwork
         else
@@ -23,7 +30,7 @@ module UsingGrape
 
       put ":id" do
         artwork = Artwork.find(params[:id])
-        if artwork.update(params)
+        if artwork.update(artwork_params)
           artwork
         else
           errors = {errors: artwork.errors.full_messages.to_sentence}
