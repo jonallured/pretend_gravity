@@ -21,19 +21,36 @@ describe "GET /api/using_grape/artworks" do
 
   context "with a few artworks" do
     before do
-      FactoryBot.create(:artwork, title: "middle artwork", created_at: 2.days.ago)
-      FactoryBot.create(:artwork, title: "oldest artwork", created_at: 3.days.ago)
-      FactoryBot.create(:artwork, title: "newest artwork", created_at: 1.days.ago)
+      FactoryBot.create(
+        :artwork,
+        title: "middle artwork",
+        featured: false,
+        created_at: 2.days.ago
+      )
+
+      FactoryBot.create(
+        :artwork,
+        title: "oldest artwork",
+        featured: true,
+        created_at: 3.days.ago
+      )
+
+      FactoryBot.create(
+        :artwork,
+        title: "newest artwork",
+        featured: false,
+        created_at: 1.days.ago
+      )
     end
 
-    it "returns those artworks sorted by newest first" do
+    it "returns those artworks sorted by featured and then newest first" do
       get "/api/using_grape/artworks"
       expect(response.status).to eq 200
 
       expected_values = [
+        ["oldest artwork"],
         ["newest artwork"],
-        ["middle artwork"],
-        ["oldest artwork"]
+        ["middle artwork"]
       ]
 
       actual_values = response.parsed_body.map do |artwork|
