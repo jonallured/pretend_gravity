@@ -1,12 +1,7 @@
 module UsingGrape
-  class ArtworksEndpoint < Grape::API
+  class ArtworksEndpoint < BaseEndpoint
     format :json
-
-    helpers do
-      def artwork_params
-        params.permit(*Artwork.permitted_params)
-      end
-    end
+    permitted_with Artwork
 
     namespace :artworks do
       get do
