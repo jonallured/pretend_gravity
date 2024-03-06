@@ -4,7 +4,7 @@ module UsingGrape
 
     helpers do
       def artwork_params
-        params.permit(:amount_cents, :artist_name, :medium, :title)
+        params.permit(*Artwork.permitted_params)
       end
     end
 
