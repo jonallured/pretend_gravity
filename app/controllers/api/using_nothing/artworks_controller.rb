@@ -2,7 +2,7 @@ module Api
   module UsingNothing
     class ArtworksController < ApplicationController
       def index
-        artworks = Artwork.all
+        artworks = Artwork.all.order(featured: :desc, created_at: :desc)
         render json: artworks
       end
 

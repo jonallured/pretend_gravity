@@ -25,6 +25,17 @@ describe "PUT /api/using_grape/artworks/:id" do
     end
   end
 
+  context "with bonus param" do
+    it "ignores that param" do
+      params = {featured: true}
+
+      put "/api/using_grape/artworks/#{artwork.id}", params: params
+
+      expect(response.status).to eq 200
+      expect(response.parsed_body["featured"]).to eq false
+    end
+  end
+
   context "with full update" do
     it "returns a 200 and that updated artwork" do
       params = {
