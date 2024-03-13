@@ -6,7 +6,7 @@ gem "rails", "7.1.3.2"
 gem "pg"
 gem "puma"
 
-gem "grape"
+gem "grape", github: "jonallured/grape", branch: "add-strong-params"
 gem "importmap-rails"
 gem "jbuilder"
 gem "redis"
